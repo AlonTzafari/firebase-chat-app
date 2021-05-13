@@ -1,23 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.scss';
+import Auth from './components/Auth';
+import Chat from './components/Chat';
+
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+import 'firebase/auth';
+
+import {useAuthState} from 'react-firebase-hooks/auth';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAQwv4lL80FlOdEAEO2EZC1vbL2xarzrsA",
+  authDomain: "chat-app-ddf42.firebaseapp.com",
+  projectId: "chat-app-ddf42",
+  storageBucket: "chat-app-ddf42.appspot.com",
+  messagingSenderId: "753410685663",
+  appId: "1:753410685663:web:b782fcafab61603224876a",
+  measurementId: "G-ZPW34NV7FP"
+};
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
 
 function App() {
+
+  const [user] = useAuthState(auth); 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {user ? <Chat user={user} /> : <Auth />}
     </div>
   );
 }
