@@ -6,13 +6,14 @@ function Home({openChat}) {
 
     const firestore = firebase.firestore();
     const messageRef = firestore.collection('chatRooms');
-    const query = messageRef.where('users', 'array-contains', firebase.auth().currentUser.uid);
-    const [chatRooms] = useCollectionData(query, {idField: 'id'});
+    const query = messageRef.where('users', 'array-contains', firebase.auth().currentUser.uid).orderBy('lastActivityAt', 'desc');
+    const [chatRooms, loading, err] = useCollectionData(query, {idField: 'id'});
 
     return (
         <div>
-            {chatRooms ? chatRooms.sort((a,b) => a.lastActivityAt.seconds - b.lastActivityAt.seconds)
-                .map(chatRoom => <ChatItem key={chatRoom.id} chatDetails={chatRoom} />) : <h2>Create Chat Room</h2>}
+            {loading ? <h2>Loading...</h2> : 
+            err ? <h2>Error loading chat rooms</h2> : 
+            chatRooms.map(chatRoom => <ChatItem key={chatRoom.id} openChat={()=> openChat(chatRoom)} chatDetails={chatRoom} />)}
         </div>
     )
 }

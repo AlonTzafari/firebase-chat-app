@@ -6,13 +6,13 @@ function Chat({chat, closeChat}) {
     
     const firestore = firebase.firestore();
     const messageRef = firestore.collection('testMsg');
-    const query = messageRef.where('chatId', '==', chat ? chat.chatId : "").orderBy('createdAt').limit(20);
-    const [messages] = useCollectionData(query, {idField: 'id'});
+    const query = messageRef.where('chatId', '==', chat.chatId).orderBy('createdAt', 'desc').limit(20);
+    const [messages, loading, err] = useCollectionData(query, {idField: 'id'});
     
     return (
         <div>
             <main>
-                {messages ? messages.map(msg => <Message key={msg.id} message={msg}/>) : <h2>No Messages</h2>}
+                {loading ? <h2>Loading...</h2> : err ? <h2>{`Error loading messages: ` + err}</h2> : messages.map(msg => <Message key={msg.id} message={msg}/>)}
             </main>
             <footer>
             </footer>

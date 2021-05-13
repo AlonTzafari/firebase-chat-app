@@ -1,10 +1,11 @@
 
 
-function ChatItem({chatDetails}) {
+function ChatItem({chatDetails, openChat}) {
+ 
     return (
-        <div>
+        <div onClick={openChat}>
             <p>{chatDetails.name}</p>
-            <p>{(new Date(chatDetails.lastActivityAt.seconds)).toISOString()}</p>
+            <p>{chatDetails.lastActivityAt.toDate().toLocaleString()}</p>
         </div>
     )
 }
