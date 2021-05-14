@@ -3,6 +3,7 @@ import firebase from '../database';
 import Home from './Home';
 import Chat from './Chat';
 import '../styles/DisplayContainer.scss';
+import {FaHome, FaDoorOpen} from 'react-icons/fa'
 
 function DisplayContainer({user}) {
     const [activeChat, setActiveChat] = useState(null);
@@ -21,12 +22,18 @@ function DisplayContainer({user}) {
     return (
         <div className="Display">
             <header>
-                <h2 onClick={closeChat}>🏠</h2>
-                <h1>{user.displayName}</h1>
-                <button onClick={signOut}>Sign Out</button>
+                <div className="group1">
+                    <button className="home" onClick={closeChat}><FaHome /></button>
+                    <h2>{user.displayName}</h2>
+                </div>
+                <button className="signOut" onClick={signOut}><FaDoorOpen /><span>Sign Out</span></button>
             </header>
             <main>
-                {activeChat ? <Chat chat={activeChat} closeChat={closeChat} /> : <Home openChat={openChat}/>}
+                {
+                    activeChat ?
+                    <Chat chat={activeChat} closeChat={closeChat} /> : 
+                    <Home openChat={openChat}/>
+                }
             </main>
         </div>
     )

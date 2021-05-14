@@ -2,6 +2,10 @@ $background-dark: rgb(24, 24, 24);
 $accent-dark: rgb(37, 36, 36);
 $text-dark: white;
 
+$background-light: rgb(240, 242, 245);
+$accent-light:  rgb(255, 255, 255);
+$text-light: rgb(0, 0, 0);
+
 .App {
   text-align: center;
   margin: 0;
@@ -14,8 +18,12 @@ $text-dark: white;
       background-color: $accent-dark;
     }
   }
-  &.light{
-
+  &.light {
+    background-color: $background-light;
+    color: $text-light;
+    header {
+      background-color: $accent-light;
+    }
   }
 }
 
