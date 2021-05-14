@@ -2,6 +2,7 @@ import firebase from '../database';
 import SignInExt from './SignInExt';
 import gIcon from '../googleIcon128.png';
 import fIcon from '../facebookIcon128.png';
+import '../styles/Auth.scss';
 
 function Auth() {
 
@@ -11,10 +12,9 @@ function Auth() {
     }
 
     return (
-        <div>
+        <div className="Auth">
             <SignInExt loginHandler={googleAuth} iconSrc={gIcon} text="google"/>
             <SignInExt loginHandler={()=>{}} iconSrc={fIcon} text="facebook"/>
-            {/* <button onClick={googleAuth}>Sign In With Google</button> */}
         </div>
     )
 }
