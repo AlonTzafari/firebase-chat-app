@@ -8,8 +8,15 @@
     justify-content: space-between;
     border-radius: 5px;
     padding: 3px;
+    box-shadow: 3px 3px 15px 3px rgba(0, 0, 0, 0.421);
+    margin-bottom: 5px;
     
     .sender {
         font-size: 0.7em;
+        text-align: start;
+        opacity: 0.7;
+    }
+    .text {
+        text-align: start;
     }
 }
