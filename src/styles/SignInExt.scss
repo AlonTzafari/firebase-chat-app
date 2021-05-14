@@ -1,0 +1,17 @@
+.signInExt {
+    display: flex;
+    height: 60px;
+    width: 180px;
+    padding: 0;
+    justify-content: flex-start;
+    align-items: center;
+    
+    img {
+        height: 60px;
+        margin-right: 5%;
+    }
+
+    span {
+        font-size: 1.5em;
+    }
+}
