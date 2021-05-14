@@ -31,7 +31,7 @@ function DisplayContainer({user}) {
             <main>
                 {
                     activeChat ?
-                    <Chat chat={activeChat} closeChat={closeChat} /> : 
+                    <Chat chat={activeChat} /> : 
                     <Home openChat={openChat}/>
                 }
             </main>

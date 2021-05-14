@@ -1,10 +1,12 @@
 $background-dark: rgb(24, 24, 24);
 $accent-dark: rgb(37, 36, 36);
 $text-dark: white;
+$message-dark: rgb(37, 36, 36);
 
 $background-light: rgb(240, 242, 245);
 $accent-light:  rgb(255, 255, 255);
 $text-light: rgb(0, 0, 0);
+$message-light: rgb(182, 219, 224);
 
 .App {
   text-align: center;
@@ -17,12 +19,24 @@ $text-light: rgb(0, 0, 0);
     header {
       background-color: $accent-dark;
     }
+    footer {
+      background-color: $accent-dark;
+    }
+    .message {
+      background-color: $message-dark;
+    }
   }
   &.light {
     background-color: $background-light;
     color: $text-light;
     header {
       background-color: $accent-light;
+    }
+    footer {
+      background-color: $accent-dark;
+    }
+    .message {
+      background-color: $message-light;
     }
   }
 }

@@ -1,0 +1,55 @@
+.chat {
+    $footerHeight: 90px; 
+    height: 100%;
+    .messagesContainer {
+        display: flex;
+        flex-direction: column-reverse;
+        box-sizing: border-box;
+        width: 100%;
+        max-width: 900px;
+        height: 100%;
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-bottom: $footerHeight;
+        margin-left: auto;
+        margin-right: auto;
+        overflow-x: auto;
+    }
+
+    footer {
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        bottom: 0;
+        height: $footerHeight;
+        width: 100%;
+        padding-left: 8px;
+        padding-right: 8px;
+        .messageForm {
+            margin: 0;
+            display: flex;
+
+            width: 100%;
+            max-width: 800px;
+            input {
+                width: 90%;
+                height: $footerHeight * 0.5;
+                border-radius: $footerHeight * 0.26;
+                padding-left: 2%;
+                padding-right: 2%;
+                font-size: 1rem;
+                border: unset;
+                &:focus {
+                    outline: unset;
+                }
+            }
+            .send {
+                all: unset;
+                font-size: 2em;
+                margin-left: 1em;
+            }
+        }
+    }
+}
