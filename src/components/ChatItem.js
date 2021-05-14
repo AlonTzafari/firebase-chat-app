@@ -1,4 +1,4 @@
-
+import '../styles/ChatItem.scss';
 
 function ChatItem({chatDetails, openChat}) {
  

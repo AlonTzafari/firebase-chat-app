@@ -4,6 +4,7 @@ import ChatItem from './ChatItem';
 import ChatEditor from './ChatEditor';
 import {themeContext} from '../context';
 import {useContext, useState} from 'react';
+import '../styles/Home.scss';
 
 function Home({openChat}) {
 
@@ -14,8 +15,10 @@ function Home({openChat}) {
     const {toggleTheme} = useContext(themeContext)
     const [isEditor, setIsEditor] = useState(false);
     return (
-        <div>
-            <button onClick={toggleTheme}>THEME</button>
+        <div className="home">
+            <div className="optionsContainer">
+                <button onClick={toggleTheme}>THEME</button>
+            </div>
             <div className="chatsContainer">
                 {
                     loading ? <h2>Loading...</h2> : 
