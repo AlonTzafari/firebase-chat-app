@@ -3,9 +3,9 @@
 function ChatItem({chatDetails, openChat}) {
  
     return (
-        <div onClick={openChat}>
+        <div className="chatItem" onClick={openChat}>
+            <img src={chatDetails.roomImg} alt="room" />
             <p>{chatDetails.name}</p>
-            <p>{chatDetails.lastActivityAt.toDate().toLocaleString()}</p>
         </div>
     )
 }

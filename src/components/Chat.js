@@ -6,7 +6,7 @@ function Chat({chat, closeChat}) {
     
     const firestore = firebase.firestore();
     const messageRef = firestore.collection('testMsg');
-    const query = messageRef.where('chatId', '==', chat.chatId).orderBy('createdAt', 'desc').limit(20);
+    const query = messageRef.where('chatId', '==', chat.id).orderBy('createdAt', 'desc').limit(20);
     const [messages, loading, err] = useCollectionData(query, {idField: 'id'});
     
     return (
