@@ -2,6 +2,7 @@ import {useState} from 'react';
 import firebase from '../database';
 import Home from './Home';
 import Chat from './Chat';
+import '../styles/DisplayContainer.scss';
 
 function DisplayContainer({user}) {
     const [activeChat, setActiveChat] = useState(null);
@@ -18,13 +19,15 @@ function DisplayContainer({user}) {
         firebase.auth().signOut();
     }
     return (
-        <div>
+        <div className="Display">
             <header>
-                <h2 onClick={closeChat}>HOME</h2>
+                <h2 onClick={closeChat}>🏠</h2>
                 <h1>{user.displayName}</h1>
                 <button onClick={signOut}>Sign Out</button>
             </header>
-            {activeChat ? <Chat chat={activeChat} closeChat={closeChat} /> : <Home openChat={openChat}/>}
+            <main>
+                {activeChat ? <Chat chat={activeChat} closeChat={closeChat} /> : <Home openChat={openChat}/>}
+            </main>
         </div>
     )
 }

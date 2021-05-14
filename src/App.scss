@@ -1,4 +1,6 @@
 $background-dark: rgb(24, 24, 24);
+$accent-dark: rgb(37, 36, 36);
+$text-dark: white;
 
 .App {
   text-align: center;
@@ -7,6 +9,10 @@ $background-dark: rgb(24, 24, 24);
   
   &.dark {
     background-color: $background-dark;
+    color: $text-dark;
+    header {
+      background-color: $accent-dark;
+    }
   }
   &.light{
 
