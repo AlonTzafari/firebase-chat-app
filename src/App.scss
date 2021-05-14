@@ -33,10 +33,13 @@ $message-light: rgb(182, 219, 224);
       background-color: $accent-light;
     }
     footer {
-      background-color: $accent-dark;
+      background-color: $accent-light;
     }
     .message {
       background-color: $message-light;
+    }
+    input {
+      background-color: rgb(218, 217, 217);
     }
   }
 }
