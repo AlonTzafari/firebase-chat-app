@@ -3,7 +3,7 @@ import firebase from '../database';
 
 function Message({message}) {
     
-    const isUserMessage = firebase.auth().currentUser.uid === message.uid; 
+    const isUserMessage = firebase.auth().currentUser.uid === message.uid;
     
     return (
         <div className = {`message ${isUserMessage && 'userSend'}`}>
