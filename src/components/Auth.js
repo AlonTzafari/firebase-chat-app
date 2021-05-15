@@ -9,7 +9,12 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 
 function Auth() {
     const auth = firebase.auth();
+
     const [user] = useAuthState(auth);
+    
+    const mailAuth = (email, password) => {
+        auth.signInWithEmailAndPassword(email, password);
+    }
     const googleAuth = () => {
         const provider = new firebase.auth.GoogleAuthProvider();
         auth.signInWithPopup(provider);
@@ -21,7 +26,7 @@ function Auth() {
     
     return (
         <div className="Auth">
-            <SignInMail />
+            <SignInMail loginHandler={mailAuth}/>
             <SignInExt loginHandler={googleAuth} iconSrc={gIcon} text="google"/>
             <SignInExt loginHandler={facebookAuth} iconSrc={fIcon} text="facebook"/>
             {user && <Redirect to="/home"/>}

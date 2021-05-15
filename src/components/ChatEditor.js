@@ -46,7 +46,13 @@ function ChatEditor({closeEditor}) {
                     <form onSubmit={createChat}>
                         <img src={imgFile} alt="room"/>
                         <input ref={nameRef} type="text" placeholder="room name" required={true}/>
-                        <input ref={passRef} type="text" placeholder="room password" pattern="[A-Za-z0-9]{4,16}" title={"only contain letters and numbers. between 4 to 16 characters."}/>
+                        <input 
+                            ref={passRef} type="text"
+                            placeholder="room password"
+                            pattern="[A-Za-z0-9]{4,16}" 
+                            title={"only contain letters and numbers. between 4 to 16 characters."}
+                            required={true}
+                        />
                         <input onChange={uploadHander} type="file" accept="image/*"/>
                         <button type="submit">Create</button>
                     </form> : 
