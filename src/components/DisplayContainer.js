@@ -3,16 +3,18 @@ import firebase from '../database';
 import Home from './Home';
 import Chat from './Chat';
 import '../styles/DisplayContainer.scss';
-import {FaHome, FaDoorOpen} from 'react-icons/fa'
+import {FaHome, FaDoorOpen} from 'react-icons/fa';
+import {Redirect, Switch, Route, useHistory} from 'react-router-dom';
 
 function DisplayContainer({user}) {
     const [activeChat, setActiveChat] = useState(null);
-
+    const history = useHistory();
     const openChat = (chat) => {
         setActiveChat(chat);          
     }
 
     const closeChat = () => {
+        history.push('/home');
         setActiveChat(null);
     }
 
@@ -31,9 +33,18 @@ function DisplayContainer({user}) {
             <main>
                 {
                     activeChat ?
-                    <Chat chat={activeChat} /> : 
-                    <Home openChat={openChat}/>
+                    <Redirect to={"/chat/" + activeChat.id}/> : 
+                    <Redirect to="/home"/>
                 }
+                <Switch>
+                    <Route exact path="/home">
+                    <Home openChat={openChat}/>
+                    </Route>
+                    <Route path="/chat/:id">
+                        <Chat chat={activeChat} />
+                    </Route>
+                    
+                </Switch>
             </main>
         </div>
     )
