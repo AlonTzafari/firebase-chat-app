@@ -2,6 +2,7 @@ import {useState} from 'react';
 import firebase from '../database';
 import Home from './Home';
 import Chat from './Chat';
+import JoinChat from './JoinChat';
 import '../styles/DisplayContainer.scss';
 import {FaHome, FaDoorOpen} from 'react-icons/fa';
 import {Redirect, Switch, Route, useHistory} from 'react-router-dom';
@@ -33,6 +34,7 @@ function DisplayContainer({user}) {
                 <Switch>
                     <Route exact path="/home" component={Home} />
                     <Route path="/chat/:id" component={Chat} />
+                    <Route path="/joinchat/:id" component={JoinChat} />
                     <Route exact path="/">
                         <Redirect to="/home"/>
                     </Route>
