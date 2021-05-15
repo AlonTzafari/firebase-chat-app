@@ -38,7 +38,7 @@ function Chat() {
             uid: firebase.auth().currentUser.uid,
             text: inputRef.current.value,
             createdAt: firebase.firestore.Timestamp.now(),
-            chatId: chat.id,
+            chatId: id,
             
         }).then(() => {
             chatDoc.update({lastActivityAt: firebase.firestore.Timestamp.now()});
