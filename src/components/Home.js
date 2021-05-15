@@ -19,6 +19,7 @@ function Home({openChat}) {
 
     useEffect(() => {
         if (user) setHeaderContent(<h2>{user.displayName}</h2>);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user])
 
     return (

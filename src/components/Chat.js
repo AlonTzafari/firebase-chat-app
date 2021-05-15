@@ -24,6 +24,7 @@ function Chat() {
         return () => {
             setHeaderContent(<></>)
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [chat])
 
     const errorDisplayer = (error) => {
