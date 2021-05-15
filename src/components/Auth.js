@@ -14,12 +14,16 @@ function Auth() {
         const provider = new firebase.auth.GoogleAuthProvider();
         auth.signInWithPopup(provider);
     }
+    const facebookAuth = () => {
+        const provider = new firebase.auth.FacebookAuthProvider();
+        auth.signInWithPopup(provider);
+    }
     
     return (
         <div className="Auth">
             <SignInMail />
             <SignInExt loginHandler={googleAuth} iconSrc={gIcon} text="google"/>
-            <SignInExt loginHandler={()=>{}} iconSrc={fIcon} text="facebook"/>
+            <SignInExt loginHandler={facebookAuth} iconSrc={fIcon} text="facebook"/>
             {user && <Redirect to="/home"/>}
         </div>
     )
