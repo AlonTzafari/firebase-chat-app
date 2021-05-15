@@ -5,6 +5,8 @@ import ChatItem from './ChatItem';
 import ChatEditor from './ChatEditor';
 import {themeContext, headerContext} from '../context';
 import {useContext, useState, useEffect} from 'react';
+import {BsFillPlusCircleFill as PlusSign} from 'react-icons/bs';
+import {FaAdjust} from 'react-icons/fa';
 import '../styles/Home.scss';
 
 function Home({openChat}) {
@@ -25,8 +27,9 @@ function Home({openChat}) {
     return (
         <div className="home">
             <div className="optionsContainer">
-                <button onClick={toggleTheme}>THEME</button>
+                <button onClick={toggleTheme}><FaAdjust/></button>
             </div>
+                {isEditor ? <ChatEditor closeEditor={() => {setIsEditor(false)}}/> : <button className="addChat" onClick={() => {setIsEditor(true)}}><PlusSign/></button>}
             <div className="chatsContainer">
                 {
                     loading ? <h2>Loading...</h2> : 
@@ -35,7 +38,6 @@ function Home({openChat}) {
                 }
             </div>
             
-            {isEditor ? <ChatEditor closeEditor={() => {setIsEditor(false)}}/> : <button onClick={() => {setIsEditor(true)}}>NEW CHAT ROOM</button>}
         </div>
     )
 }

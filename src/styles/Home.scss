@@ -6,12 +6,14 @@
     .optionsContainer {
         box-sizing: border-box;
         width: 100%;
+        padding-top: 5px;
         padding-left: 30px;
         display: flex;
         flex-direction: row;
         justify-content: flex-start;
         button {
-            width: fit-content;
+            all: unset;
+            font-size: 2em;
         }
     }
     .chatsContainer {
@@ -19,5 +21,16 @@
         justify-content: center;
         width: 80%;
         margin-bottom: 5%;
+    }
+
+    .addChat {
+        all: unset;
+        color: rgb(26, 117, 26);
+        font-size: 5em;
+
+        &:hover {
+            cursor: pointer;
+            transform: scale(1.1);
+        }
     }
 }
