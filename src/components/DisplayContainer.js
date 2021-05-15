@@ -30,16 +30,11 @@ function DisplayContainer({user}) {
                 <button className="signOut" onClick={signOut}><FaDoorOpen /><span>Sign Out</span></button>
             </header>
             <main>
-                {/* { activeChat && <Redirect to={"/chat/" + activeChat.id}/> } */}
                 <Switch>
-                    {/* <Route exact path="/">
+                    <Route exact path="/home" component={Home} />
+                    <Route path="/chat/:id" component={Chat} />
+                    <Route exact path="/">
                         <Redirect to="/home"/>
-                    </Route> */}
-                    <Route exact path="/home">
-                    <Home />
-                    </Route>
-                    <Route path="/chat/:id">
-                        <Chat />
                     </Route>
                     
                 </Switch>
