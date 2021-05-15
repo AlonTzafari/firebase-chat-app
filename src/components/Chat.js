@@ -1,17 +1,31 @@
 import firebase from '../database';
-import { useCollectionData } from "react-firebase-hooks/firestore";
+import { useCollectionData, useDocumentData } from "react-firebase-hooks/firestore";
 import Message from './Message';
 import '../styles/Chat.scss';
 import {BiSend} from 'react-icons/bi';
-import {useRef} from 'react';
+import {useRef, useContext, useEffect, useState} from 'react';
+import {useParams} from 'react-router-dom';
+import {headerContext} from '../context';
 
-function Chat({chat}) {
+function Chat() {
+    const {id} = useParams()
     
     const firestore = firebase.firestore();
     const messageRef = firestore.collection('messages');
-    const query = messageRef.where('chatId', '==', chat.id).orderBy('createdAt', 'desc').limit(20);
+    const chatRoomsRef = firestore.collection('chatRooms');
+    const chatDoc = chatRoomsRef.doc(id) //where('id', '==', id);
+    const query = messageRef.where('chatId', '==', id).orderBy('createdAt', 'desc').limit(20);
+    const [chat, chatLoading, chatErr] = useDocumentData(chatDoc);
     const [messages, loading, err] = useCollectionData(query, {idField: 'id'});
     const inputRef = useRef();
+    const {setHeaderContent} = useContext(headerContext);
+    useEffect(() => {
+        if (!chatLoading && !chatErr) setHeaderContent(<h2>{chat.name}</h2>);
+        return () => {
+            setHeaderContent(<></>)
+        }
+    }, [chat, chatLoading])
+
     const errorDisplayer = (error) => {
         console.log(error);
         return <h2>{'Error loading messages'}</h2>;
@@ -24,6 +38,8 @@ function Chat({chat}) {
             createdAt: firebase.firestore.Timestamp.now(),
             chatId: chat.id,
             
+        }).then(() => {
+            chatDoc.update({lastActivityAt: firebase.firestore.Timestamp.now()});
         });
         inputRef.current.value = '';
         e.preventDefault();

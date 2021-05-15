@@ -1,21 +1,19 @@
-import {useState} from 'react';
+import {useContext, useState} from 'react';
 import firebase from '../database';
 import Home from './Home';
 import Chat from './Chat';
 import '../styles/DisplayContainer.scss';
 import {FaHome, FaDoorOpen} from 'react-icons/fa';
 import {Redirect, Switch, Route, useHistory} from 'react-router-dom';
+import {headerContext} from '../context';
+
 
 function DisplayContainer({user}) {
-    const [activeChat, setActiveChat] = useState(null);
+    const [headerContent, setHeaderContent] = useState( () => <></> )
     const history = useHistory();
-    const openChat = (chat) => {
-        setActiveChat(chat);          
-    }
 
     const closeChat = () => {
         history.push('/home');
-        setActiveChat(null);
     }
 
     const signOut = () => {
@@ -23,29 +21,30 @@ function DisplayContainer({user}) {
     }
     return (
         <div className="Display">
+            <headerContext.Provider value={{headerContent, setHeaderContent}}>
             <header>
                 <div className="group1">
                     <button className="home" onClick={closeChat}><FaHome /></button>
-                    <h2>{user.displayName}</h2>
+                    {headerContent}
                 </div>
                 <button className="signOut" onClick={signOut}><FaDoorOpen /><span>Sign Out</span></button>
             </header>
             <main>
-                {
-                    activeChat ?
-                    <Redirect to={"/chat/" + activeChat.id}/> : 
-                    <Redirect to="/home"/>
-                }
+                {/* { activeChat && <Redirect to={"/chat/" + activeChat.id}/> } */}
                 <Switch>
+                    {/* <Route exact path="/">
+                        <Redirect to="/home"/>
+                    </Route> */}
                     <Route exact path="/home">
-                    <Home openChat={openChat}/>
+                    <Home />
                     </Route>
                     <Route path="/chat/:id">
-                        <Chat chat={activeChat} />
+                        <Chat />
                     </Route>
                     
                 </Switch>
             </main>
+            </headerContext.Provider>
         </div>
     )
 }

@@ -2,8 +2,8 @@ import firebase from '../database';
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import ChatItem from './ChatItem';
 import ChatEditor from './ChatEditor';
-import {themeContext} from '../context';
-import {useContext, useState} from 'react';
+import {themeContext, headerContext} from '../context';
+import {useContext, useState, useEffect} from 'react';
 import '../styles/Home.scss';
 
 function Home({openChat}) {
@@ -12,8 +12,14 @@ function Home({openChat}) {
     const chatRoomsRef = firestore.collection('chatRooms');
     const query = chatRoomsRef.where('users', 'array-contains', firebase.auth().currentUser.uid).orderBy('lastActivityAt', 'desc');
     const [chatRooms, loading, err] = useCollectionData(query, {idField: 'id'});
-    const {toggleTheme} = useContext(themeContext)
+    const {toggleTheme} = useContext(themeContext);
+    const {setHeaderContent} = useContext(headerContext);
     const [isEditor, setIsEditor] = useState(false);
+
+    useEffect(() => {
+        setHeaderContent(<h2>{firebase.auth().currentUser.displayName}</h2>);
+    }, [])
+
     return (
         <div className="home">
             <div className="optionsContainer">
