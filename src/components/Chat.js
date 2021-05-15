@@ -1,24 +1,25 @@
-import firebase from '../database';
-import { useCollectionData, useDocumentData } from "react-firebase-hooks/firestore";
-import Message from './Message';
 import '../styles/Chat.scss';
-import {BiSend} from 'react-icons/bi';
 import {useRef, useContext, useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 import {headerContext} from '../context';
+import firebase from '../database';
+import { useCollectionData, useDocumentData } from "react-firebase-hooks/firestore";
+import {BiSend} from 'react-icons/bi';
+import Message from './Message';
 
 function Chat() {
+
     const {id} = useParams()
-    
     const firestore = firebase.firestore();
     const messageRef = firestore.collection('messages');
     const chatRoomsRef = firestore.collection('chatRooms');
-    const chatDoc = chatRoomsRef.doc(id) //where('id', '==', id);
+    const chatDoc = chatRoomsRef.doc(id);
     const query = messageRef.where('chatId', '==', id).orderBy('createdAt', 'desc').limit(20);
     const [chat] = useDocumentData(chatDoc);
     const [messages, loading, err] = useCollectionData(query, {idField: 'id'});
     const inputRef = useRef();
     const {setHeaderContent} = useContext(headerContext);
+
     useEffect(() => {
         if (chat) setHeaderContent(<h2>{chat.name}</h2>);
         return () => {
