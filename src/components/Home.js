@@ -18,7 +18,7 @@ function Home({openChat}) {
     const [isEditor, setIsEditor] = useState(false);
 
     useEffect(() => {
-        if (user) setHeaderContent(<h2>{user.displayName}</h2>);
+        if (user) setHeaderContent(<h2>{user.displayName || user.email.split('@')[0]}</h2>);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user])
 
